@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="icon" href="titleicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    
+
+    <div id="navbar">
+        <h1>ToDo</h1>
+
+    </div>
+    <div id="container">
+        <div id="book-container">
+            <h2>Task Name</h2>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis temporibus placeat consequuntur! Quos iusto suscipit, repudiandae vitae voluptate ducimus rerum voluptatibus.</p>
+            <button onclick="deletecontainer(event)">Delete</button>
+        </div>
+    </div>
+    <div id="popup-overlay"></div>
+    <div id="popup-box">
+        <h2>Add Book</h2>
+        <form>
+            <input id="book-title" type="text" placeholder="Book Title">
+            <input id="book-author" type="text" placeholder="Book Author">
+            <textarea id="book-description" placeholder="Short Description..."></textarea>
+            <button id="add-book">Add</button>
+            <button id="cancel">Cancel</button>
+
+        </form>
+    </div>
+
+    <button id="popup-button">+</button>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    
+}
+body{
+    font-family: "Poppins", sans-serif;
+}
+#navbar{
+    background-color: #4E40A3;
+    padding: 10px;
+    color: white;
+}
+
+#container{
+    padding: 10px;
+}
+#book-container{
+    padding: 15px;
+    width: 18%;
+    background-color:#4E40A3;
+    color: white;
+    border-radius: 10px;
+    margin: 25px;
+    display: inline-block;
+    vertical-align: top;
+
+
+}
+#book-container h2{
+    margin-bottom:10px ;
+}
+
+
+
+#book-container p{
+    padding-bottom: 10px;
+
+}
+
+#book-container button{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+#popup-button{
+    background-color: #4E40A3;
+    color: white;
+    border-radius: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    font-size: 40px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+}
+
+#popup-overlay{
+    background-color: black;
+    opacity: 0.8;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    z-index: 1;
+    display: none;
+}
+
+#popup-box{
+    background-color:#4E40A3 ;
+    width: 40%;
+    padding: 40px;
+    border-radius: 10px;
+    position: absolute;
+    top: 20%;
+    left: 25%;
+    z-index: 2;
+    display: none;
+    
+
+}
+#popup-box h2{
+    margin-bottom: 5px;
+
+}
+
+
+#popup-box input{
+    background: transparent;
+    border: none;
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+    font-size: 20px;
+    border-bottom: solid black 2px;
+
+}
+
+#popup-box textarea{
+    background: transparent;
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+    font-size: 20px;
+    border: solid black 2px;
+
+}
+
+#popup-box input::placeholder{
+    color: black;
+}
+
+#popup-box textarea::placeholder{
+    color: black;
+}
+
+#popup-box button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    border: none;
+    margin: 5px;
+}
+
+#popup-box input:focus{
+    outline: none;
+}
+
+#popup-box textarea:focus{
+    outline: none;
+}
+
+
+
+
+</style>
+    <script>
+var button = document.getElementById("popup-button")
+var popupoverlay = document.getElementById("popup-overlay")
+var popupbox = document.getElementById("popup-box")
+
+button.addEventListener("click",function(){
+    popupoverlay.style.display="block"
+    popupbox.style.display="block"
+})
+
+var cancel = document.getElementById("cancel")
+var addbook =  document.getElementById("add-book")
+
+cancel.addEventListener("click", function(){
+    event.preventDefault()
+    popupoverlay.style.display="none"
+    popupbox.style.display="none"
+
+})
+
+addbook.addEventListener("click", function(){
+    event.preventDefault()    
+})
+
+
+
+
+var addbook = document.getElementById("add-book")
+var container = document.getElementById("container")
+var booktitle = document.getElementById("book-title")
+var bookauthor = document.getElementById("book-author")
+var bookdescription = document.getElementById("book-description")
+
+addbook.addEventListener("click", function(){
+    var div = document.createElement("div")
+    div.setAttribute("id","book-container")
+    div.innerHTML=`<h2>${booktitle.value}</h2>
+    <h4>${bookauthor.value}</h4>
+    <p>${bookdescription.value}</p>
+    <button onclick="deletecontainer(event)">Delete</button>`
+    container.append(div)
+    popupoverlay.style.display="none"
+    popupbox.style.display="none"
+})
+
+function deletecontainer(event)
+{
+    event.target.parentElement.remove()
+} 
+    </script>
+</body>
+</html>
